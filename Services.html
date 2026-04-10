@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Our Services | VR Cyber Hub</title>
+    <link rel="icon" href="logo.png">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            scroll-behavior: smooth;
+        }
+
+        /* ========== HEADER (matching VR Cyber Hub style) ========== */
+        .header {
+            background: #0b1120;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .logo span {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c084fc, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.2s;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: #a78bfa;
+            border-bottom-color: #a78bfa;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        /* responsive header */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            .nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 70%;
+                height: calc(100vh - 80px);
+                background: #0f172ad9;
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                gap: 28px;
+                transition: left 0.3s ease;
+                box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+                z-index: 999;
+            }
+            .nav.open {
+                left: 0;
+            }
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* ========== SERVICES HERO ========== */
+        .services-hero {
+            background: linear-gradient(125deg, #0f172a 0%, #1e293b 100%);
+            padding: 60px 24px 70px;
+            text-align: center;
+            color: white;
+        }
+
+        .services-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #e0e7ff, #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .services-hero p {
+            font-size: 1.2rem;
+            max-width: 680px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* ========== SERVICES MAIN GRID (ENHANCED) ========== */
+        .services-main {
+            max-width: 1280px;
+            margin: 60px auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title span {
+            background: linear-gradient(120deg, #4f46e5, #8b5cf6);
+            padding: 0 12px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .service-grid-detailed {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 35px -12px rgba(79, 70, 229, 0.2);
+            border-color: #a78bfa;
+        }
+
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.05);
+        }
+
+        .service-info {
+            padding: 24px 20px 28px;
+        }
+
+        .service-info h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #1e293b, #3b2e5e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .service-info p {
+            color: #334155;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .service-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .feature-tag {
+            background: #ede9fe;
+            color: #5b21b6;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 40px;
+        }
+
+        .btn-service {
+            background: linear-gradient(95deg, #4f46e5, #8b5cf6);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 8px rgba(79,70,229,0.2);
+        }
+
+        .btn-service:hover {
+            background: linear-gradient(95deg, #6366f1, #a78bfa);
+            transform: scale(0.98);
+            box-shadow: 0 6px 14px rgba(79,70,229,0.3);
+        }
+
+        /* popup modal for service details */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 32px;
+            padding: 28px 24px 32px;
+            text-align: center;
+            animation: fadeUp 0.25s ease;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content i {
+            font-size: 48px;
+            color: #4f46e5;
+            margin-bottom: 16px;
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .modal-content p {
+            margin-bottom: 24px;
+            color: #1e293b;
+        }
+
+        .close-modal {
+            background: #e2e8f0;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* CTA section */
+        .cta-services {
+            background: linear-gradient(120deg, #0f172a, #1e1b4b);
+            margin: 40px 24px 60px;
+            border-radius: 48px;
+            padding: 48px 32px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-services h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-services .btn-apply {
+            background: white;
+            color: #4f46e5;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .cta-services .btn-apply:hover {
+            background: #e0e7ff;
+            transform: scale(1.02);
+        }
+
+        /* footer */
+        footer {
+            background: #0b1120;
+            color: #94a3b8;
+            text-align: center;
+            padding: 28px 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        /* whatsapp fixed button */
+        .whatsapp {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #25D366;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: 0.2s;
+            z-index: 1100;
+        }
+
+        .whatsapp:hover {
+            transform: scale(1.08);
+            background: #20b359;
+        }
+
+        @media (max-width: 550px) {
+            .service-info h3 {
+                font-size: 1.4rem;
+            }
+            .services-hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER (same style as original) -->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="VR Cyber Hub Logo" onerror="this.src='https://placehold.co/60x60?text=VR'">
+            <span>VR Cyber Hub</span>
+        </div>
+        <nav class="nav" id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="Services.html" class="active">Services</a>
+            <a href="Apply.html">Apply</a>
+            <a href="About.js">About</a>
+            <a href="Contact.js">Contact</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<!-- Services Hero Section -->
+<section class="services-hero">
+    <h1>✨ Our Premium Services ✨</h1>
+    <p>One-stop digital seva kendra – fast, secure & government-approved services at your doorstep.</p>
+</section>
+
+<!-- Dynamic Services Grid with 9+ detailed services -->
+<section class="services-main">
+    <div class="section-title"><span>🚀 What We Offer</span></div>
+    <div class="service-grid-detailed" id="servicesGrid"></div>
+</section>
+
+<!-- CTA to Apply -->
+<section class="cta-services">
+    <h2>Need assistance or apply online?</h2>
+    <p>Get your Aadhar, PAN, Passport, Bill payments & more done in minutes.</p>
+    <a href="Apply.html" class="btn-apply">Apply Now →</a>
+</section>
+
+<!-- Contact info strip -->
+<section class="contact" style="max-width: 1000px; margin: 20px auto; text-align: center; background: white; border-radius: 40px; padding: 32px 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+    <h2 style="margin-bottom: 16px;">📞 Get in Touch</h2>
+    <p style="margin: 8px 0;">📍 Near you: VR Digital Pro, Meerut (CSC Center)</p>
+    <p>📞 9528095030 / 9997610447 &nbsp;&nbsp;|&nbsp;&nbsp; 📧 vrdigitalmerketing@gmail.com</p>
+    <div style="margin-top: 20px;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3489.269103148056!2d77.7565937107135!3d29.009022066782666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c7b4b0005917b%3A0x187c2febc485c0be!2sVR%20Digital%20Pro!5e0!3m2!1sen!2sin!4v1775769670553!5m2!1sen!2sin" width="100%" height="250" style="border:0; border-radius: 24px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+
+<!-- WhatsApp fixed button -->
+<a href="https://wa.me/919528095030" class="whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<footer>
+    <p>© 2026 VR Cyber Hub | All Rights Reserved | Jan Seva Kendra (CSC Center)</p>
+</footer>
+
+<!-- Modal Popup for details -->
+<div id="serviceModal" class="modal">
+    <div class="modal-content">
+        <i class="fas fa-concierge-bell"></i>
+        <h3 id="modalTitle">Service Name</h3>
+        <p id="modalDesc">Detailed information about the service will appear here.</p>
+        <button class="close-modal" id="closeModalBtn">Close</button>
+    </div>
+</div>
+
+<script>
+    // ---------- SERVICES DATA (complete with images, descriptions, features) ----------
+    const servicesList = [
+        {
+            id: 1,
+            name: "Aadhar Card",
+            shortDesc: "Aadhaar enrollment, correction, update & PVC card printing.",
+            fullDesc: "We provide complete Aadhaar services: New Enrollment, Address/Mobile/Name update, Biometric update, and PVC Aadhaar card printing. Fast & secure with UIDAI certified center.",
+            features: ["Biometric Update", "Address Change", "PVC Card", "Child Aadhaar"],
+            image: "aahar.jpg",
+            icon: "fa-id-card"
+        },
+        {
+            id: 2,
+            name: "PAN Card",
+            shortDesc: "New PAN card, correction, reprint & e-PAN instant.",
+            fullDesc: "Apply for new PAN Card, change details, reprint lost PAN, or get instant e-PAN via email. We assist in form filling, document upload, and tracking.",
+            features: ["New PAN", "Correction", "e-PAN", "TATKAL"],
+            image: "pan.jpg",
+            icon: "fa-credit-card"
+        },
+        {
+            id: 3,
+            name: "Online Forms",
+            shortDesc: "Govt job forms, university admission, competitive exams.",
+            fullDesc: "We fill all types of online forms: SSC, Bank, Railway, UP Police, Army, CTET, UPTET, University admission, scholarship forms with photo & signature processing.",
+            features: ["Job Forms", "Scholarship", "University", "Photo/Sign"],
+            image: "form.jpg",
+            icon: "fa-file-alt"
+        },
+        {
+            id: 4,
+            name: "Bill Payment",
+            shortDesc: "Electricity, water, gas, mobile, DTH, FASTag recharge.",
+            fullDesc: "Pay all utility bills instantly – Electricity (UPCL, PVVNL, etc), Water, Piped Gas, Mobile prepaid/postpaid, DTH, Landline, FASTag recharge & loan EMI.",
+            features: ["Electricity", "Gas Booking", "Mobile Recharge", "FASTag"],
+            image: "Electricity Bill.jpg",
+            icon: "fa-file-invoice-dollar"
+        },
+        {
+            id: 5,
+            name: "Banking Services",
+            shortDesc: "Money transfer, balance check, mini statement, AEPS.",
+            fullDesc: "Banking at your doorstep: Cash deposit/withdrawal, fund transfer (IMPS/NEFT), balance inquiry, mini statement, Aadhaar enabled payment system (AEPS), Pension & PMJDY services.",
+            features: ["AEPS", "Money Transfer", "Balance Enquiry", "Mini Statement"],
+            image: "Banking.jpg",
+            icon: "fa-university"
+        },
+        {
+            id: 6,
+            name: "Passport Services",
+            shortDesc: "Passport application assistance, appointment booking.",
+            fullDesc: "Complete assistance for fresh passport or renewal. We help in filling online application, scheduling appointment at PSK, document verification and police verification tracking.",
+            features: ["Fresh Passport", "Renewal", "Appointment", "Police Verification"],
+            image: "Passport.jpg",
+            icon: "fa-passport"
+        },
+        {
+            id: 7,
+            name: "Voter ID Card",
+            shortDesc: "Voter registration, correction, EPIC download.",
+            fullDesc: "New voter ID registration, change constituency, address correction, duplicate voter card, and EPIC number digital download. Fast processing with Election Commission.",
+            features: ["New Registration", "Correction", "Duplicate", "EPIC Download"],
+            image: "Voter ID.jpg",
+            icon: "fa-check-circle"
+        },
+        {
+            id: 8,
+            name: "Driving License",
+            shortDesc: "Learner's license, DL renewal, duplicate license.",
+            fullDesc: "Assistance in LL (Learner License), Permanent Driving License, renewal after expiry, duplicate license, and international driving permit (IDP) support.",
+            features: ["Learner License", "Renewal", "Duplicate", "IDP"],
+            image: "Driving License.jpg",
+            icon: "fa-car"
+        },
+        {
+            id: 9,
+            name: "CSC Digital Seva",
+            shortDesc: "All government schemes, certificates, pension services.",
+            fullDesc: "CSC e-Governance services: Income, Caste, Domicile certificates, Old Age Pension, PM Kisan, Ayushman Card, Jal Jeevan Mission, and all digital India initiatives.",
+            features: ["Certificates", "Pension", "Ayushman Card", "PM Kisan"],
+            image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&h=200&fit=crop",
+            icon: "fa-hand-holding-heart"
+        }
+    ];
+
+    // Function to render service cards
+    function renderServices() {
+        const gridContainer = document.getElementById('servicesGrid');
+        if (!gridContainer) return;
+        
+        let html = '';
+        servicesList.forEach(service => {
+            // fallback image if missing: we use placeholder gradient or unsplash style but maintain consistency
+            let imgSrc = service.image;
+            // if the image might be local and not exist, we provide a backup colored div? but we'll keep original references.
+            // For missing images, browser will show alt, but we add onerror handling later.
+            html += `
+                <div class="service-card" data-id="${service.id}">
+                    <div class="service-img">
+                        <img src="${imgSrc}" alt="${service.name}" onerror="this.src='https://placehold.co/400x200?text=${service.name.replace(/ /g, '+')}'">
+                    </div>
+                    <div class="service-info">
+                        <h3>${service.name}</h3>
+                        <p>${service.shortDesc}</p>
+                        <div class="service-features">
+                            ${service.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+                        <button class="btn-service" data-service='${JSON.stringify(service)}'>
+                            Know More <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+        gridContainer.innerHTML = html;
+        
+        // Add event listeners to all "Know More" buttons
+        document.querySelectorAll('.btn-service').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const serviceData = btn.getAttribute('data-service');
+                if (serviceData) {
+                    const serviceObj = JSON.parse(serviceData);
+                    openModal(serviceObj);
+                }
+            });
+        });
+        
+        // also add card click optional? but button is enough
+    }
+    
+    // Modal handling
+    const modal = document.getElementById('serviceModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    
+    function openModal(service) {
+        modalTitle.innerText = service.name;
+        // enhanced description with full info + features list
+        let featuresHtml = service.features.map(f => `✓ ${f}`).join('<br>');
+        modalDesc.innerHTML = `${service.fullDesc}<br><br><strong>Key highlights:</strong><br>${featuresHtml}`;
+        modal.style.display = 'flex';
+    }
+    
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+    
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    // ---------- HAMBURGER MENU TOGGLE (matching original index) ----------
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+        // close nav when clicking on a link (optional)
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+            });
+        });
+    }
+    
+    // Active link highlight stays for Services page (already class active)
+    // Additional: smooth scroll and apply button redirection simulated but we keep external links
+    // fallback for images: ensure all unsplash images are valid but we already have onerror
+    
+    // Also update the apply now buttons / link from apply section points to Apply.html
+    // Ensure that whatsapp, phone numbers are consistent
+    
+    // Also add additional hover effects, dynamic year in footer maybe
+    const yearSpan = document.querySelector('footer p');
+    if (yearSpan) {
+        // just keeping static but it's fine
+    }
+    
+    // Initialize everything after DOM loads
+    document.addEventListener('DOMContentLoaded', () => {
+        renderServices();
+        
+        // Small fallback for original images that may not exist, but all services grid shows detailed.
+        // For extra polish: add a class to body to ensure loaded
+    });
+    
+    // Optionally, if any form submission or apply button on page, we can console, but not required.
+    // attach simple handler for any "Apply Now" inside CTA: it goes to Apply.html
+    const applyCta = document.querySelector('.cta-services .btn-apply');
+    if(applyCta) {
+        applyCta.addEventListener('click', (e) => {
+            // just allow default href, but we ensure it's set properly
+        });
+    }
+    
+    // Also make sure that mobile menu close on window resize if open and >768px
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navMenu.classList.contains('open')) {
+            navMenu.classList.remove('open');
+        }
+    });
+</script>
+</body>
+</html>

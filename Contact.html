@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Contact Us | VR Cyber Hub - Jan Seva Kendra</title>
+    <link rel="icon" href="logo.png">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            scroll-behavior: smooth;
+        }
+
+        /* ========== HEADER ========== */
+        .header {
+            background: #0b1120;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .logo span {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c084fc, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.2s;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: #a78bfa;
+            border-bottom-color: #a78bfa;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            .nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 70%;
+                height: calc(100vh - 80px);
+                background: #0f172ad9;
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                gap: 28px;
+                transition: left 0.3s ease;
+                box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+                z-index: 999;
+            }
+            .nav.open {
+                left: 0;
+            }
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* ========== CONTACT HERO ========== */
+        .contact-hero {
+            background: linear-gradient(125deg, #0f172a 0%, #1e1b4b 100%);
+            padding: 60px 24px 70px;
+            text-align: center;
+            color: white;
+        }
+
+        .contact-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #e0e7ff, #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .contact-hero p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 0 auto;
+            opacity: 0.92;
+        }
+
+        /* ========== MAIN CONTACT SECTION ========== */
+        .contact-main {
+            max-width: 1280px;
+            margin: 60px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        /* contact info cards */
+        .contact-info {
+            background: white;
+            border-radius: 32px;
+            padding: 32px 28px;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #1e293b, #4f46e5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .info-card-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .info-card-item i {
+            width: 48px;
+            height: 48px;
+            background: #ede9fe;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #4f46e5;
+        }
+
+        .info-card-item .details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: #1e293b;
+        }
+
+        .info-card-item .details p, 
+        .info-card-item .details a {
+            color: #475569;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .info-card-item .details a:hover {
+            color: #8b5cf6;
+        }
+
+        .social-links {
+            margin-top: 32px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            width: 48px;
+            height: 48px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: #334155;
+            transition: 0.2s;
+        }
+
+        .social-links a:hover {
+            background: #4f46e5;
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        /* contact form */
+        .contact-form {
+            background: white;
+            border-radius: 32px;
+            padding: 32px 28px;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-form p {
+            color: #64748b;
+            margin-bottom: 28px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        .input-group label i {
+            margin-right: 8px;
+            color: #8b5cf6;
+        }
+
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            background: #fefefe;
+        }
+
+        .input-group input:focus, 
+        .input-group select:focus, 
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+
+        .btn-submit {
+            background: linear-gradient(95deg, #4f46e5, #8b5cf6);
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 12px;
+        }
+
+        .btn-submit:hover {
+            transform: scale(0.98);
+            background: linear-gradient(95deg, #6366f1, #a78bfa);
+        }
+
+        /* map section */
+        .map-section {
+            max-width: 1280px;
+            margin: 20px auto 50px;
+            padding: 0 24px;
+        }
+
+        .map-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .map-card iframe {
+            width: 100%;
+            height: 380px;
+            border: none;
+        }
+
+        .map-card .map-caption {
+            padding: 20px;
+            text-align: center;
+            background: #f8fafc;
+            font-weight: 500;
+        }
+
+        /* business hours */
+        .hours-section {
+            max-width: 1280px;
+            margin: 30px auto 50px;
+            padding: 0 24px;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .hour-card {
+            background: white;
+            border-radius: 28px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .hour-card i {
+            font-size: 38px;
+            color: #4f46e5;
+            margin-bottom: 12px;
+        }
+
+        .hour-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        /* toast message */
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 500;
+            z-index: 2000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(8px);
+        }
+
+        /* whatsapp button */
+        .whatsapp {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #25D366;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: 0.2s;
+            z-index: 1100;
+        }
+
+        .whatsapp:hover {
+            transform: scale(1.08);
+            background: #20b359;
+        }
+
+        footer {
+            background: #0b1120;
+            color: #94a3b8;
+            text-align: center;
+            padding: 28px 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 850px) {
+            .contact-main {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .contact-hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="VR Cyber Hub Logo" onerror="this.src='https://placehold.co/60x60?text=VR'">
+            <span>VR Cyber Hub</span>
+        </div>
+        <nav class="nav" id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="Services.html">Services</a>
+            <a href="Apply.html">Apply</a>
+            <a href="About.html">About</a>
+            <a href="Contact.html" class="active">Contact</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<!-- Contact Hero -->
+<section class="contact-hero">
+    <h1>📞 Contact Us</h1>
+    <p>We're here to help! Reach out for any queries, service assistance, or feedback. Our team responds within 2 hours.</p>
+</section>
+
+<!-- Main Contact Area -->
+<div class="contact-main">
+    <!-- Left: Contact Information -->
+    <div class="contact-info">
+        <h2><i class="fas fa-address-card"></i> Get in Touch</h2>
+        
+        <div class="info-card-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="details">
+                <h4>Visit Our Center</h4>
+                <p>VR Digital Pro, Near Bus Stand, Meerut - 250001, Uttar Pradesh</p>
+            </div>
+        </div>
+
+        <div class="info-card-item">
+            <i class="fas fa-phone-alt"></i>
+            <div class="details">
+                <h4>Call Us</h4>
+                <p><a href="tel:9528095030">+91 9528095030</a> / <a href="tel:9997610447">+91 9997610447</a></p>
+                <p style="font-size: 0.85rem;">Mon-Sat: 9AM to 7PM</p>
+            </div>
+        </div>
+
+        <div class="info-card-item">
+            <i class="fas fa-envelope"></i>
+            <div class="details">
+                <h4>Email Support</h4>
+                <p><a href="mailto:vrdigitalmerketing@gmail.com">vrdigitalmerketing@gmail.com</a></p>
+                <p>For business inquiries & support</p>
+            </div>
+        </div>
+
+        <div class="info-card-item">
+            <i class="fab fa-whatsapp"></i>
+            <div class="details">
+                <h4>WhatsApp Helpline</h4>
+                <p><a href="https://wa.me/919528095030" target="_blank">Click to Chat on WhatsApp</a></p>
+                <p>Instant replies on text</p>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+
+    <!-- Right: Quick Contact Form -->
+    <div class="contact-form">
+        <h2>✉️ Send Message</h2>
+        <p>Fill the form and our executive will reach you shortly</p>
+        
+        <form id="contactForm">
+            <div class="input-group">
+                <label><i class="fas fa-user"></i> Full Name *</label>
+                <input type="text" id="contactName" placeholder="Enter your name" required>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-phone-alt"></i> Mobile Number *</label>
+                <input type="tel" id="contactMobile" placeholder="10 digit mobile number" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" id="contactEmail" placeholder="your@email.com">
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-tag"></i> Inquiry Type</label>
+                <select id="inquiryType">
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Service Support">Service Support</option>
+                    <option value="Document Issue">Document Issue</option>
+                    <option value="Feedback/Suggestion">Feedback/Suggestion</option>
+                    <option value="Partnership">Partnership / Franchise</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-comment-dots"></i> Your Message *</label>
+                <textarea rows="4" id="contactMsg" placeholder="Describe your query or service requirement..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send Message <i class="fas fa-arrow-right"></i></button>
+        </form>
+    </div>
+</div>
+
+<!-- Business Hours Section -->
+<div class="hours-section">
+    <div class="hours-grid">
+        <div class="hour-card">
+            <i class="fas fa-calendar-week"></i>
+            <h4>Working Days</h4>
+            <p>Monday to Saturday</p>
+            <p style="color:#4f46e5; font-weight:600;">Sunday: Closed</p>
+        </div>
+        <div class="hour-card">
+            <i class="fas fa-clock"></i>
+            <h4>Opening Hours</h4>
+            <p>Morning: 9:00 AM - 1:00 PM</p>
+            <p>Evening: 2:00 PM - 7:00 PM</p>
+        </div>
+        <div class="hour-card">
+            <i class="fas fa-tty"></i>
+            <h4>Emergency Support</h4>
+            <p>📞 +91 9528095030</p>
+            <p>Available on WhatsApp 24x7</p>
+        </div>
+    </div>
+</div>
+
+<!-- Google Map Location -->
+<div class="map-section">
+    <div class="map-card">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3489.269103148056!2d77.7565937107135!3d29.009022066782666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c7b4b0005917b%3A0x187c2febc485c0be!2sVR%20Digital%20Pro!5e0!3m2!1sen!2sin!4v1775769670553!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-caption">
+            <i class="fas fa-location-dot" style="color:#4f46e5;"></i> VR Digital Pro, Meerut – Landmark: Near Bus Stand & CSC Center
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toastMsg" class="toast-message">
+    <i class="fas fa-check-circle"></i> <span id="toastText">Message sent! We'll contact you soon.</span>
+</div>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919528095030" class="whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<footer>
+    <p>© 2026 VR Cyber Hub | Jan Seva Kendra (CSC Center) | All Rights Reserved | <i class="fas fa-heart" style="color:#c084fc;"></i> Digital India Initiative</p>
+</footer>
+
+<script>
+    // ========== MOBILE MENU TOGGLE ==========
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+            });
+        });
+    }
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navMenu.classList.contains('open')) {
+            navMenu.classList.remove('open');
+        }
+    });
+
+    // ========== TOAST FUNCTION ==========
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toastMsg');
+        const toastText = document.getElementById('toastText');
+        toastText.innerText = message;
+        toast.style.display = 'flex';
+        toast.style.backgroundColor = isError ? '#b91c1c' : '#0f172a';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 4000);
+    }
+
+    // ========== CONTACT FORM SUBMIT WITH LOCAL STORAGE ==========
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('contactName').value.trim();
+        const mobile = document.getElementById('contactMobile').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const inquiryType = document.getElementById('inquiryType').value;
+        const message = document.getElementById('contactMsg').value.trim();
+        
+        // Validations
+        if (name === "") {
+            showToast("❌ Please enter your full name", true);
+            return;
+        }
+        if (mobile === "" || !/^\d{10}$/.test(mobile)) {
+            showToast("❌ Valid 10-digit mobile number required", true);
+            return;
+        }
+        if (message === "") {
+            showToast("❌ Please write your message", true);
+            return;
+        }
+        if (email !== "" && !/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(email)) {
+            showToast("⚠️ Please enter a valid email address or leave blank", true);
+            return;
+        }
+        
+        // Save to localStorage (contact inquiries)
+        const inquiryData = {
+            id: Date.now(),
+            name: name,
+            mobile: mobile,
+            email: email || "Not provided",
+            inquiryType: inquiryType,
+            message: message,
+            submittedOn: new Date().toLocaleString(),
+            status: "Pending"
+        };
+        
+        let allInquiries = JSON.parse(localStorage.getItem('vr_cyber_contact_inquiries') || '[]');
+        allInquiries.unshift(inquiryData);
+        localStorage.setItem('vr_cyber_contact_inquiries', JSON.stringify(allInquiries));
+        
+        // Also store last inquiry for demo purposes
+        localStorage.setItem('last_contact_inquiry', JSON.stringify(inquiryData));
+        
+        // Show success
+        showToast(`✅ Thanks ${name}! Your inquiry has been received. We'll call you at ${mobile} soon.`);
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Optional: log to console
+        console.log("Contact Inquiry Saved:", inquiryData);
+        
+        // Optionally you can send via email simulation (just frontend)
+        // You could integrate EmailJS, but this is full frontend storage demo.
+    });
+    
+    // ========== PRE-FILL FROM URL PARAM (optional) ==========
+    // No need extra
+    
+    // ========== DYNAMIC YEAR FOR FOOTER ==========
+    const footerPara = document.querySelector('footer p');
+    if (footerPara) {
+        const currentYear = new Date().getFullYear();
+        if (!footerPara.innerText.includes('2026') && currentYear !== 2026) {
+            footerPara.innerHTML = `© ${currentYear} VR Cyber Hub | Jan Seva Kendra (CSC Center) | All Rights Reserved | <i class="fas fa-heart" style="color:#c084fc;"></i> Digital India Initiative`;
+        }
+    }
+    
+    // ========== ADD SOME HOVER EFFECTS ON INFO CARDS ==========
+    const infoItems = document.querySelectorAll('.info-card-item');
+    infoItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'translateX(6px)';
+            item.style.transition = '0.2s';
+        });
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'translateX(0)';
+        });
+    });
+    
+    // ========== FALLBACK FOR IMAGES ==========
+    const logoImg = document.querySelector('.logo img');
+    if (logoImg) {
+        logoImg.addEventListener('error', function() {
+            this.src = 'https://placehold.co/60x60?text=VR';
+        });
+    }
+    
+    // ========== ADD QUICK CHAT REDIRECT ==========
+    console.log("VR Cyber Hub - Contact Page Loaded | Jan Seva Kendra");
+    
+    // Auto-fill for testing? not needed, just show total inquiries count in console.
+    const totalInquiries = localStorage.getItem('vr_cyber_contact_inquiries');
+    if (totalInquiries) {
+        const count = JSON.parse(totalInquiries).length;
+        console.log(`📬 Total contact inquiries received: ${count}`);
+    }
+    
+    // Also if you want to simulate map directions alert, just for interaction.
+    const mapCaption = document.querySelector('.map-caption');
+    if (mapCaption) {
+        mapCaption.style.cursor = 'pointer';
+        mapCaption.addEventListener('click', () => {
+            window.open('https://maps.google.com/?q=VR+Digital+Pro+Meerut', '_blank');
+        });
+    }
+</script>
+</body>
+</html>
